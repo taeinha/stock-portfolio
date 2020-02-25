@@ -41,11 +41,24 @@ class SessionForm extends React.Component {
       <div className="session-form-container">
         <h1>{formType}</h1>
         <form onSubmit={this.handleSubmit} noValidate>
+          {formType === "Sign Up" ? (
+            <label>
+              <input
+                type="text"
+                value={this.state.username}
+                onChange={this.update('username')}
+                placeholder="Username"
+                required
+              />
+              {/* Error */}
+            </label>
+          ) : null}
+
           <label>
             <input 
               type="text" 
               value={this.state.email}
-              onChange={this.update('username')}
+              onChange={this.update('email')}
               placeholder="Email"
               required
               />
@@ -62,7 +75,9 @@ class SessionForm extends React.Component {
             />
             {/* Error */}
           </label>
+          <button type="submit">{formType}</button>
         </form>
+        <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
       </div>
     );
   }
