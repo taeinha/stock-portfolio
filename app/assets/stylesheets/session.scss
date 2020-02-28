@@ -1,0 +1,43 @@
+@import "colors.scss";
+
+.session-title {
+  font-family: 'Kaushan Script', ;
+  font-size: 24px;
+}
+
+.session-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $lightgrey;
+}
+
+.session-form-container {
+  height: 500px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  justify-content: center;
+  align-items: center;
+}
+
+.session-form-container > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.session-form-container > form input {
+  border: 1px solid $grey;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 300px;
+  height: 38px;
+  box-sizing: border-box;
+}
+
+::placeholder {
+  color: $grey;
+}

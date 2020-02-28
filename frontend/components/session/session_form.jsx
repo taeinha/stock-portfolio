@@ -38,47 +38,49 @@ class SessionForm extends React.Component {
     const { formType } = this.props;
 
     return (
-      <div className="session-form-container">
-        <h1>{formType}</h1>
-        <form onSubmit={this.handleSubmit} noValidate>
-          {formType === "Sign Up" ? (
+      <main className="session-container">
+        <div className="session-form-container">
+          <h1 className="session-title">{formType}</h1>
+          <form onSubmit={this.handleSubmit} noValidate>
+            {formType === "Sign Up" ? (
+              <label>
+                <input
+                  type="text"
+                  value={this.state.username}
+                  onChange={this.update('username')}
+                  placeholder="Username"
+                  required
+                />
+                {/* Error */}
+              </label>
+            ) : null}
+
             <label>
               <input
                 type="text"
-                value={this.state.username}
-                onChange={this.update('username')}
-                placeholder="Username"
+                value={this.state.email}
+                onChange={this.update('email')}
+                placeholder="Email"
                 required
               />
               {/* Error */}
             </label>
-          ) : null}
 
-          <label>
-            <input 
-              type="text" 
-              value={this.state.email}
-              onChange={this.update('email')}
-              placeholder="Email"
-              required
+            <label>
+              <input
+                type="password"
+                value={this.state.password}
+                onChange={this.update('password')}
+                placeholder="Password"
+                required
               />
-            {/* Error */}
-          </label>
-
-          <label>
-            <input
-              type="password"
-              value={this.state.email}
-              onChange={this.update('username')}
-              placeholder="Password"
-              required
-            />
-            {/* Error */}
-          </label>
-          <button type="submit">{formType}</button>
-        </form>
-        <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
-      </div>
+              {/* Error */}
+            </label>
+            <button type="submit">{formType}</button>
+          </form>
+          <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
+        </div>
+      </main>
     );
   }
 }
