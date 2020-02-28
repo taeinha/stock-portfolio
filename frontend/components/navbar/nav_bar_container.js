@@ -3,10 +3,9 @@ import { logout } from "../../actions/session_actions";
 import NavBar from "./nav_bar";
 
 const msp = (state, ownProps) => {
-  // const user = state.entities.users[state.session.id];
-  // return {
-  //   currentUser: user,
-  // };
+  return {
+    currentUser: state.session.id,
+  };
 };
 
 const mdp = dispatch => ({
