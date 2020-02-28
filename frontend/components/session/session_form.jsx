@@ -78,7 +78,12 @@ class SessionForm extends React.Component {
             </label>
             <button type="submit">{formType}</button>
           </form>
-          <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
+
+          {formType === "Sign Up" ? (
+            <p>Already have an account? <Link to="/login">Sign in</Link></p>
+          ) : (
+            <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
+          )}
         </div>
       </main>
     );

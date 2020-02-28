@@ -12,8 +12,8 @@ const Root = ({ store }) => {
       <HashRouter>
         <Switch>
           <AuthRoute exact path="/login" component={LoginApp} />
-          <ProtectedRoute exact path="/signup" component={SignupApp} />
-          <AuthRoute path="/" component={App} />
+          <AuthRoute exact path="/signup" component={SignupApp} />
+          <ProtectedRoute path="/" component={App} />
         </Switch>
       </HashRouter>
     </Provider>
