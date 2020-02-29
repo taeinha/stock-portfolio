@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.currentUser) {
     const preloadedState = {
       entities: {
-        user: { [window.currentUser.id]: window.currentUser }
+        user: window.currentUser
       },
       session: { id: window.currentUser.id }
     };
@@ -20,4 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const root = document.getElementById("root");
   ReactDOM.render(<Root store={store} />, root);
+
+  window.getState = store.getState();
 });

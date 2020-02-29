@@ -1,5 +1,6 @@
 import { RECEIVE_CURRENT_USER } from "../actions/session_actions";
 import { merge } from "lodash";
+import { RECEIVE_SINGLE_TRANSACTION } from "../actions/transaction_actions";
 
 const usersReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -7,7 +8,9 @@ const usersReducer = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      return merge({}, state, { [action.user.id]: action.user });
+      return action.user;
+    case RECEIVE_SINGLE_TRANSACTION:
+      return action.payload.user;
     default:
       return state;
   }

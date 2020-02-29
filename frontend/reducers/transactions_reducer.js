@@ -9,7 +9,7 @@ const transactionsReducer = (state = {}, action) => {
     case RECEIVE_ALL_TRANSACTIONS:
       return action.payload || {};
     case RECEIVE_SINGLE_TRANSACTION:
-      transaction = action.payload;
+      transaction = action.payload.transaction;
       newState = merge({}, state);
       newState[transaction.id] = merge({}, newState[transaction.id], transaction);
       return transaction;

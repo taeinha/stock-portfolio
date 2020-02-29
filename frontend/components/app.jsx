@@ -6,10 +6,10 @@ const App = (props) => {
   return (
     <div className="app-container">
       <NavBarContainer />
-      {/* <Switch>
-        <Route exact path="/" component={VideoIndexContainer} />
-        <Route exact path="/transactions" component={VideoShowContainer} />
-      </Switch> */}
+      <Switch>
+        {/* <Route exact path="/" component={VideoIndexContainer} /> */}
+        {/* <Route exact path="/transactions" component={VideoShowContainer} /> */}
+      </Switch>
     </div>
   )
 }
