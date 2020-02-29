@@ -39,15 +39,15 @@ class Portfolio extends React.Component {
     const { user, stocks } = this.props;
     const { stocksData } = this.state;
     let latestPrice, openPrice, change, total, portfolioItems;
-    let netWorth = 0.0;
+    let netWorth = 0;
     const tickers = Object.values(stocks).map(stock => stock.ticker);
     if (stocksData && Object.keys(stocksData).length === tickers.length) {
       portfolioItems = stocks.map(stock => {
-        latestPrice = stocksData[stock.ticker].quote.latestPrice;
+        latestPrice = twoDecimals(stocksData[stock.ticker].quote.latestPrice);
         openPrice = stocksData[stock.ticker].quote.open;
         change = twoDecimals((latestPrice - openPrice) * 100 / openPrice);
         total = twoDecimals(latestPrice * stock.quantity);
-        netWorth += total;
+        netWorth += parseFloat(total);
         
         return <PortfolioItem
           ticker={stock.ticker}
@@ -66,10 +66,17 @@ class Portfolio extends React.Component {
       <div className="overall-portfolio-container">
         <div className="portfolio-container">
           <div>
-            <h1>{user.username}'s Portfolio (${parseFloat(netWorth).toFixed(2)})</h1>
+            <h1>{user.username}'s Portfolio (${netWorth})</h1>
             <i className="fas fa-sync-alt"></i>
           </div>
           <ul className="portfolio-stock-list">
+            <li className="portfolio-item-container">
+              <p>Symbol</p>
+              <p>Quantity</p>
+              <p>Price</p>
+              <p>Change</p>
+              <p>Equity</p>
+            </li>
             {portfolioItems}
           </ul>
         </div>

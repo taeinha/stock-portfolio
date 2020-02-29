@@ -1,0 +1,35 @@
+@import "colors.scss";
+
+.transactions-container {
+  margin-top: 200px;
+  height: calc(100% - 200px);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.transactions-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.transactions-container td, .transactions-container th {
+  width: 100px;
+  text-align: center;
+}
+
+.transactions-container tr {
+  height: 40px;
+}
+
+.transactions-container tr:nth-child(even) {
+  background-color: $lightgrey;
+}
+
+.transactions-container tr:nth-child(odd) {
+  background-color: $skyblue;
+}
+
+.transactions-container thead > tr {
+  background-color: $grey !important;
+}
