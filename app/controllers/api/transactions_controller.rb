@@ -7,7 +7,7 @@ class Api::TransactionsController < ApplicationController
   end
 
   def create
-    @stock = Stock.find_by_ticker(params[:transaction][:ticker])
+    @stock = Stock.find_by_ticker(params[:transaction][:ticker].upcase)
     @transaction = Transaction.new(
       user_id: current_user.id,
       stock_id: @stock.id,
@@ -23,6 +23,7 @@ class Api::TransactionsController < ApplicationController
         render json: ['Not enough funds to make this transaction!'], status: 422
       else
         @transaction.save
+        @quantity = current_user.transactions.includes(:company).where(stock_id: @stock.id).group(:company).sum(:quantity).values.first
         render :show
       end
       

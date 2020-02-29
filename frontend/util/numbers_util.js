@@ -1,3 +1,3 @@
 export const twoDecimals = float => {
-  return parseFloat(float.toFixed(2));
+  return parseFloat((Math.round(float * 100) / 100)).toFixed(2);
 };

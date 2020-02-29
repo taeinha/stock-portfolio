@@ -9,39 +9,67 @@ class Portfolio extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stocksData: {}
+      stocksData: null
     };
+  }
+
+  componentDidMount() {
+    const { fetchAllStocks } = this.props;
+
+    fetchAllStocks().then((data) => {
+      const tickers = Object.values(data.payload).map(stock => stock.ticker);
+      fetchTickers(tickers).then(data => {
+        this.setState({stocksData: data});
+      });
+    });
+  }
+
+  componentDidUpdate() {
+    const { stocksData } = this.state;
+    const { stocks } = this.props;
+    const tickers = Object.values(stocks).map(stock => stock.ticker);
+    if (stocksData && Object.keys(stocksData).length !== tickers.length) {
+      fetchTickers(tickers).then(data => {
+        this.setState({ stocksData: data });
+      });
+    }
   }
 
   render() {
     const { user, stocks } = this.props;
     const { stocksData } = this.state;
-    let latestPrice, openPrice, change, total;
-    let netWorth = 0;
+    let latestPrice, openPrice, change, total, portfolioItems;
+    let netWorth = 0.0;
+    const tickers = Object.values(stocks).map(stock => stock.ticker);
+    if (stocksData && Object.keys(stocksData).length === tickers.length) {
+      portfolioItems = stocks.map(stock => {
+        latestPrice = stocksData[stock.ticker].quote.latestPrice;
+        openPrice = stocksData[stock.ticker].quote.open;
+        change = twoDecimals((latestPrice - openPrice) * 100 / openPrice);
+        total = twoDecimals(latestPrice * stock.quantity);
+        netWorth += total;
+        
+        return <PortfolioItem
+          ticker={stock.ticker}
+          quantity={stock.quantity}
+          price={latestPrice}
+          change={change}
+          total={total}
+          key={stock.id}
+        />;
+      });
+    } else {
+      portfolioItems = null;
+    }
 
-    const portfolioItems = stocks.map(stock => {
-      latestPrice = stocksData[stock.ticker].latestPrice;
-      openPrice = stocksData[stock.ticker].openPrice;
-      change = twoDecimals((latestPrice - open) * 100 / open);
-      total = twoDecimals(latestPrice * stock.quantity);
-      netWorth += total;
-      
-      return <PortfolioItem
-        ticker={stock.ticker}
-        quantity={stock.quantity}
-        price={latestPrice}
-        change={change}
-        total={total}
-      />;
-    });
     return (
       <div className="overall-portfolio-container">
         <div className="portfolio-container">
           <div>
-            <h1>{user.username}'s Portfolio ({netWorth})</h1>
-            <i class="fas fa-sync-alt"></i>
+            <h1>{user.username}'s Portfolio (${parseFloat(netWorth).toFixed(2)})</h1>
+            <i className="fas fa-sync-alt"></i>
           </div>
-          <ul>
+          <ul className="portfolio-stock-list">
             {portfolioItems}
           </ul>
         </div>

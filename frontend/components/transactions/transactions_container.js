@@ -8,7 +8,7 @@ const msp = state => ({
 });
 
 const mdp = dispatch => ({
-  fetchAllStocks: () => dispatch(fetchAllStocks()),
+  fetchAllStocks: () => dispatch(fetchAllStocks())
 });
 
 export default connect(msp, mdp)(Portfolio);

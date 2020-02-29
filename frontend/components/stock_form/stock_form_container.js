@@ -4,9 +4,11 @@ import { createStock } from "../../actions/stock_actions";
 import { createTransaction } from "../../actions/transaction_actions";
 import { fetchTicker } from "../../util/iex_api_util";
 
-const msp = state => ({
-  balance: state.user.balance,
-});
+const msp = state => {
+  return {
+    balance: state.entities.user.balance,
+  };
+};
 
 const mdp = dispatch => ({
   submitStock: stock => dispatch(createStock(stock)),

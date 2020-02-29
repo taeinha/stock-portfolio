@@ -4,7 +4,7 @@ const BATCH_QUOTE_URL = "https://cloud.iexapis.com/stable/stock/market/batch?sym
 export const fetchTicker = ticker => {
   return $.ajax({
     method: "GET",
-    URL: 
+    url: 
       SINGLE_QUOTE_URL + 
       ticker + 
       "/quote?token=" + 
@@ -15,10 +15,10 @@ export const fetchTicker = ticker => {
 export const fetchTickers = tickers => {
   return $.ajax({
     method: "GET",
-    URL:
+    url:
       BATCH_QUOTE_URL +
       tickers.join(",") +
       "&types=quote&token=" +
-      window.iexAPIKey
+      window.iexKey
   });
 };
