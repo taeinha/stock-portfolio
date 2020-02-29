@@ -24,7 +24,8 @@ class StockForm extends React.Component {
     const { quantity, ticker } = this.state;
     const { submitStock } = this.props;
 
-    if (Number.isInteger(Number(quantity)) && quantity >= 0) {
+    if (Number.isInteger(Number(quantity)) && quantity > 0) {
+      
       fetchTicker(ticker).then(data => {
         this.setState({ 
           stockData: data,
@@ -34,6 +35,8 @@ class StockForm extends React.Component {
           ticker: data.symbol,
           company: data.companyName
         });
+      }).fail((data) => {
+        this.setState({ error: data.responseText });
       });
     } else {
       this.setState({ error: "Quantity must be an integer and be greater than zero."});
@@ -70,11 +73,21 @@ class StockForm extends React.Component {
   }
 
   render() {
-    const { buyPhase, stockData, quantity, ticker } = this.state;
-    const { balance } = this.props;
+    const { buyPhase, stockData, quantity, ticker, error } = this.state;
+    const { balance, errors } = this.props;
+    const errorLis = errors.map(error => (
+      <li>{error}</li>
+    ));
     return (
       <div className="stock-form-container">
         <h1>Balance - ${twoDecimals(balance)}</h1>
+        { error || errors.length > 0 ? (
+          <ul className="stock-form-errors-container">
+            {errors.length > 0 ? errorLis : null}
+            {error ? <li>{error}</li> : null}
+          </ul>
+        ) : null}
+        
 
         { stockData.companyName ? (
           <ul className="stock-info-container">

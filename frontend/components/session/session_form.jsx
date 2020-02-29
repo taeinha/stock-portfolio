@@ -35,12 +35,21 @@ class SessionForm extends React.Component {
   }
 
   render() {
-    const { formType } = this.props;
+    const { formType, errors } = this.props;
+    const errorLis = errors.map(error => (
+      <li>{error}</li>
+    ));
+
 
     return (
       <main className="session-container">
         <div className="session-form-container">
           <h1 className="session-title">{formType}</h1>
+          {errors.length > 0 ? (
+            <ul className="session-errors-container">
+              {errorLis}
+            </ul>
+          ) : null}
           <form onSubmit={this.handleSubmit} noValidate>
             {formType === "Sign Up" ? (
               <label>
@@ -72,7 +81,6 @@ class SessionForm extends React.Component {
                 placeholder="Password"
                 required
               />
-              {/* Error */}
             </label>
             <button type="submit">{formType}</button>
           </form>

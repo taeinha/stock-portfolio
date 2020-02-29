@@ -121,3 +121,16 @@
 .portfolio-container {
   margin-right: 20px;
 }
+
+.stock-form-errors-container {
+  background-color: $yellow;
+  color: $pink;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  width: 189px;
+}

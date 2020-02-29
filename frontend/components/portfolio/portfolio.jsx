@@ -28,7 +28,7 @@ class Portfolio extends React.Component {
     const { stocksData } = this.state;
     const { stocks } = this.props;
     const tickers = Object.values(stocks).map(stock => stock.ticker);
-    if (stocksData && Object.keys(stocksData).length !== tickers.length) {
+    if (!stocksData || (stocksData && Object.keys(stocksData).length !== tickers.length)) {
       fetchTickers(tickers).then(data => {
         this.setState({ stocksData: data });
       });

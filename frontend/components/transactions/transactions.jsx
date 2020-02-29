@@ -27,7 +27,6 @@ class Transactions extends React.Component {
     if (Object.keys(stocks).length > 0 && transactions.length > 0) {
       transactionRows = transactions.map(transaction => {
         const date = new Date(transaction.created_at).toLocaleDateString();
-        debugger
         return <TransactionsItem
           type="BUY"
           symbol={stocks[transaction.stock_id].ticker}

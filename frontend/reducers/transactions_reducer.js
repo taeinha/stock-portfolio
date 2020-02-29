@@ -12,7 +12,7 @@ const transactionsReducer = (state = {}, action) => {
       transaction = action.payload.transaction;
       newState = merge({}, state);
       newState[transaction.id] = merge({}, newState[transaction.id], transaction);
-      return transaction;
+      return newState;
     default:
       return state;
   }

@@ -71,3 +71,17 @@
 .session-form-container > p a {
   color: $blue;
 }
+
+.session-errors-container {
+  background-color: $yellow;
+  color: $pink;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.session-errors-container li {
+  margin-bottom: 5px;
+}
