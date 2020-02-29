@@ -19,4 +19,13 @@ class ApplicationController < ActionController::Base
     @current_user.reset_session_token!
     session[:session_token] = nil
   end
+
+  # used in controllers to ensure users are logged in 
+  # before taking any controller actions
+
+  def require_log_in!
+    unless logged_in?
+      render json: ['You need to be logged in.'], status: 401
+    end
+  end
 end
