@@ -1,0 +1,1 @@
+json.extract! transaction, :stock_id, :quantity, :price, :created_at,:id

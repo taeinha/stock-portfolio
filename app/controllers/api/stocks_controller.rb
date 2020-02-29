@@ -8,13 +8,12 @@ class Api::StocksController < ApplicationController
 
   def create
     @stock = Stock.find_by_ticker(params[:stock][:ticker])
-
-    unless @stock
-      @stock = Stock.new(stock_params)
-
-      if @stock.save
-
-      end
+    @stock = Stock.new(stock_params) unless @stock
+      
+    if @stock.save
+      render :show
+    else
+      render json: @stock.errors.full_messages, status: 422
     end
   end
 
