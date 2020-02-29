@@ -13,9 +13,9 @@ class SessionForm extends React.Component {
     this.demoUser = this.demoUser.bind(this);
   }
 
-  // componentWillUnmount() {
-  //   this.props.clearErrors();
-  // }
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -51,7 +51,6 @@ class SessionForm extends React.Component {
                   placeholder="Username"
                   required
                 />
-                {/* Error */}
               </label>
             ) : null}
 
@@ -63,7 +62,6 @@ class SessionForm extends React.Component {
                 placeholder="Email"
                 required
               />
-              {/* Error */}
             </label>
 
             <label>

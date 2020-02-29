@@ -4,7 +4,7 @@
   margin-top: 40px;
   width: 100%;
   display: flex;
-  height: calc(100% - 40px);
+  height: calc(100% - 70px);
   box-sizing: border-box;
   justify-content: space-evenly;
 }
@@ -17,6 +17,7 @@
   padding: 20px;
   flex-direction: column;
   margin-top: 100px;
+  background-color: $white;
 }
 
 .portfolio-container > div, .stock-form-container > h1 {
@@ -24,8 +25,11 @@
   font-size: 24px;
 }
 
+.portfolio-container > div {
+  justify-content: space-between;
+}
+
 .portfolio-container > div h1 {
-  margin-right: 100px;
   margin-bottom: 20px;
 }
 
@@ -39,9 +43,14 @@
 }
 
 .portfolio-stock-list > li > p {
-  width: 70px;
+  width: 85px;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.portfolio-stock-list > li > p > span {
+  margin-left: 5px;
 }
 
 .portfolio-stock-list > li:nth-child(odd) {

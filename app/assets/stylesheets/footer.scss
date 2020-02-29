@@ -1,0 +1,14 @@
+@import "colors.scss";
+
+.footer-container {
+  height: 30px;
+  background-color: $green;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.footer-container a {
+  color: blue;
+  text-decoration: underline;
+}

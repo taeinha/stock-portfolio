@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { fetchTickers } from '../../util/iex_api_util';
 import PortfolioItem from './portfolio_item';
-import { twoDecimals } from '../../util/numbers_util';
+import { twoDecimals, changeColor } from '../../util/numbers_util';
 import StockFormContainer from '../stock_form/stock_form_container';
 
 class Portfolio extends React.Component {
@@ -38,7 +38,7 @@ class Portfolio extends React.Component {
   render() {
     const { user, stocks } = this.props;
     const { stocksData } = this.state;
-    let latestPrice, openPrice, change, total, portfolioItems;
+    let latestPrice, openPrice, change, total, portfolioItems, color;
     let netWorth = 0;
     const tickers = Object.values(stocks).map(stock => stock.ticker);
     if (stocksData && Object.keys(stocksData).length === tickers.length) {
@@ -48,6 +48,7 @@ class Portfolio extends React.Component {
         change = twoDecimals((latestPrice - openPrice) * 100 / openPrice);
         total = twoDecimals(latestPrice * stock.quantity);
         netWorth += parseFloat(total);
+        color = changeColor(parseFloat(change));
         
         return <PortfolioItem
           ticker={stock.ticker}
@@ -56,10 +57,11 @@ class Portfolio extends React.Component {
           change={change}
           total={total}
           key={stock.id}
+          color={color}
         />;
       });
     } else {
-      portfolioItems = null;
+      portfolioItems = <li>No stocks in portfolio.</li>;
     }
 
     return (
@@ -76,7 +78,7 @@ class Portfolio extends React.Component {
                 <p>Quantity</p>
                 <p>Price</p>
                 <p>Change</p>
-                <p>Equity</p>
+                <p>Value</p>
               </li>
               {portfolioItems}
             </ul>

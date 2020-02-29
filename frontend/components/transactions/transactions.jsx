@@ -39,7 +39,7 @@ class Transactions extends React.Component {
       });
     } else {
       emptyEle = (
-        <div>Empty transactions list</div>
+        <div className="transaction-empty">No transactions made yet. You can buy stocks on the portfolio page.</div>
       )
     }
 
