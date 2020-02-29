@@ -21,12 +21,12 @@
 
 .portfolio-container > div, .stock-form-container > h1 {
   display: flex;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .portfolio-container > div h1 {
   margin-right: 100px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .portfolio-stock-list > li {
@@ -34,7 +34,7 @@
   margin-bottom: 10px;
   height: 40px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   padding: 10px;
 }
 
@@ -103,4 +103,12 @@
 
 .portfolio-item-container:first-of-type {
   font-weight: bold;
+}
+
+.portfolio-container-center {
+  display: flex;
+}
+
+.portfolio-container {
+  margin-right: 20px;
 }

@@ -64,23 +64,25 @@ class Portfolio extends React.Component {
 
     return (
       <div className="overall-portfolio-container">
-        <div className="portfolio-container">
-          <div>
-            <h1>{user.username}'s Portfolio (${netWorth})</h1>
-            <i className="fas fa-sync-alt"></i>
+        <div className="portfolio-container-center">
+          <div className="portfolio-container">
+            <div>
+              <h1>{user.username}'s Portfolio (${netWorth})</h1>
+              <i className="fas fa-sync-alt"></i>
+            </div>
+            <ul className="portfolio-stock-list">
+              <li className="portfolio-item-container">
+                <p>Symbol</p>
+                <p>Quantity</p>
+                <p>Price</p>
+                <p>Change</p>
+                <p>Equity</p>
+              </li>
+              {portfolioItems}
+            </ul>
           </div>
-          <ul className="portfolio-stock-list">
-            <li className="portfolio-item-container">
-              <p>Symbol</p>
-              <p>Quantity</p>
-              <p>Price</p>
-              <p>Change</p>
-              <p>Equity</p>
-            </li>
-            {portfolioItems}
-          </ul>
+          <StockFormContainer />
         </div>
-        <StockFormContainer />
       </div>
     )
   }
