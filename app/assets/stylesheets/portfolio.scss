@@ -33,6 +33,10 @@
   margin-bottom: 20px;
 }
 
+.portfolio-container > div i {
+  cursor: pointer;
+}
+
 .portfolio-stock-list > li {
   display: flex;
   margin-bottom: 10px;
@@ -51,6 +55,12 @@
 
 .portfolio-stock-list > li > p > span {
   margin-left: 5px;
+}
+
+.portfolio-stock-list > p {
+  text-align: center;
+  margin-bottom: 10px;
+  color: $grey;
 }
 
 .portfolio-stock-list > li:nth-child(odd) {

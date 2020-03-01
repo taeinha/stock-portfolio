@@ -11,12 +11,16 @@ class StockForm extends React.Component {
       ticker: "",
       quantity: 0,
       buyPhase: false,
-      error: "",
+      error: ""
     };
 
     this.handleSearch = this.handleSearch.bind(this);
     this.handleBuy = this.handleBuy.bind(this);
     this.resetState = this.resetState.bind(this);
+  }
+  
+  componentWillUnmount() {
+    this.props.clearErrors();
   }
 
   handleSearch(e) {
@@ -25,21 +29,24 @@ class StockForm extends React.Component {
     const { submitStock } = this.props;
 
     if (Number.isInteger(Number(quantity)) && quantity > 0) {
-      
-      fetchTicker(ticker).then(data => {
-        this.setState({ 
-          stockData: data,
-          buyPhase: true
+      fetchTicker(ticker)
+        .then(data => {
+          this.setState({
+            stockData: data,
+            buyPhase: true
+          });
+          submitStock({
+            ticker: data.symbol,
+            company: data.companyName
+          });
+        })
+        .fail(data => {
+          this.setState({ error: data.responseText });
         });
-        submitStock({
-          ticker: data.symbol,
-          company: data.companyName
-        });
-      }).fail((data) => {
-        this.setState({ error: data.responseText });
-      });
     } else {
-      this.setState({ error: "Quantity must be an integer and be greater than zero."});
+      this.setState({
+        error: "Quantity must be an integer and be greater than zero."
+      });
     }
   }
 
@@ -62,7 +69,7 @@ class StockForm extends React.Component {
       ticker: "",
       quantity: 0,
       buyPhase: false,
-      error: "",
+      error: ""
     });
   }
 
@@ -75,34 +82,43 @@ class StockForm extends React.Component {
   render() {
     const { buyPhase, stockData, quantity, ticker, error } = this.state;
     const { balance, errors } = this.props;
-    const errorLis = errors.map(error => (
-      <li>{error}</li>
-    ));
+    const errorLis = errors.map(error => <li>{error}</li>);
     return (
       <div className="stock-form-container">
         <h1>Balance - ${twoDecimals(balance)}</h1>
-        { error || errors.length > 0 ? (
+        {error || errors.length > 0 ? (
           <ul className="stock-form-errors-container">
             {errors.length > 0 ? errorLis : null}
             {error ? <li>{error}</li> : null}
           </ul>
         ) : null}
-        
 
-        { stockData.companyName ? (
+        {stockData.companyName ? (
           <ul className="stock-info-container">
-            <li><p>Company</p><p>{stockData.companyName}</p></li>
-            <li><p>Price</p><p>{stockData.latestPrice}</p></li>
-            <li><p>Subtotal</p><p>{stockData.latestPrice * quantity}</p></li>
+            <li>
+              <p>Company</p>
+              <p>{stockData.companyName}</p>
+            </li>
+            <li>
+              <p>Price</p>
+              <p>{stockData.latestPrice}</p>
+            </li>
+            <li>
+              <p>Subtotal</p>
+              <p>{stockData.latestPrice * quantity}</p>
+            </li>
           </ul>
         ) : null}
-        
-        <form onSubmit={buyPhase ? this.handleBuy : this.handleSearch} noValidate>
+
+        <form
+          onSubmit={buyPhase ? this.handleBuy : this.handleSearch}
+          noValidate
+        >
           <label>
             <input
               type="text"
               value={ticker}
-              onChange={this.update('ticker')}
+              onChange={this.update("ticker")}
               placeholder="Ticker"
               required
               disabled={buyPhase}
@@ -112,20 +128,19 @@ class StockForm extends React.Component {
           <label>
             <input
               type="text"
-              value={(quantity === 0) ? "" : quantity}
-              onChange={this.update('quantity')}
+              value={quantity === 0 ? "" : quantity}
+              onChange={this.update("quantity")}
               placeholder="Quantity"
               required
               disabled={buyPhase}
             />
           </label>
-          { buyPhase ? (
+          {buyPhase ? (
             <>
               <button type="submit">Buy</button>
-              <div 
-                className="cancel-button"
-                onClick={this.resetState}
-                >Cancel</div>
+              <div className="cancel-button" onClick={this.resetState}>
+                Cancel
+              </div>
             </>
           ) : (
             <button type="submit">Search</button>
