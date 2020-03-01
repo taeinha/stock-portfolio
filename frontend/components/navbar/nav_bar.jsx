@@ -25,13 +25,19 @@ class NavBar extends React.Component {
           <h1>StockSim</h1>
         </nav>
         <nav className="right-nav">
-          { history.location.pathname === "/transactions" ? (
-            <Link to="/">Portfolio</Link>
+          {history.location.pathname === "/transactions" ? (
+            <Link to="/" className="hvr-fade">
+              Portfolio
+            </Link>
           ) : (
-            <Link to="/transactions">Transactions</Link>
+            <Link to="/transactions" className="hvr-fade">
+              Transactions
+            </Link>
           )}
 
-          <button onClick={this.handleLogout}>Sign Out</button>
+          <button onClick={this.handleLogout} className="hvr-fade">
+            Sign Out
+          </button>
         </nav>
       </main>
     );

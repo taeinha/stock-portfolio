@@ -88,6 +88,10 @@
   border-radius: 5px;
 }
 
+.stock-form-container form input:focus {
+  border: 1px solid $blue;
+}
+
 .stock-form-container form button {
   background-color: $green;
   width: 189px;

@@ -18,7 +18,7 @@ class StockForm extends React.Component {
     this.handleBuy = this.handleBuy.bind(this);
     this.resetState = this.resetState.bind(this);
   }
-  
+
   componentWillUnmount() {
     this.props.clearErrors();
   }
@@ -137,13 +137,17 @@ class StockForm extends React.Component {
           </label>
           {buyPhase ? (
             <>
-              <button type="submit">Buy</button>
+              <button type="submit" className="hvr-grow-shadow">
+                Buy
+              </button>
               <div className="cancel-button" onClick={this.resetState}>
                 Cancel
               </div>
             </>
           ) : (
-            <button type="submit">Search</button>
+            <button type="submit" className="hvr-grow-shadow">
+              Search
+            </button>
           )}
         </form>
       </div>

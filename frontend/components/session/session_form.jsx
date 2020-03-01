@@ -46,9 +46,7 @@ class SessionForm extends React.Component {
         <div className="session-form-container">
           <h1 className="session-title">{formType}</h1>
           {errors.length > 0 ? (
-            <ul className="session-errors-container">
-              {errorLis}
-            </ul>
+            <ul className="session-errors-container">{errorLis}</ul>
           ) : null}
           <form onSubmit={this.handleSubmit} noValidate>
             {formType === "Sign Up" ? (
@@ -56,7 +54,7 @@ class SessionForm extends React.Component {
                 <input
                   type="text"
                   value={this.state.username}
-                  onChange={this.update('username')}
+                  onChange={this.update("username")}
                   placeholder="Username"
                   required
                 />
@@ -67,7 +65,7 @@ class SessionForm extends React.Component {
               <input
                 type="text"
                 value={this.state.email}
-                onChange={this.update('email')}
+                onChange={this.update("email")}
                 placeholder="Email"
                 required
               />
@@ -77,18 +75,24 @@ class SessionForm extends React.Component {
               <input
                 type="password"
                 value={this.state.password}
-                onChange={this.update('password')}
+                onChange={this.update("password")}
                 placeholder="Password"
                 required
               />
             </label>
-            <button type="submit">{formType}</button>
+            <button type="submit" className="hvr-grow-shadow">
+              {formType}
+            </button>
           </form>
 
           {formType === "Sign Up" ? (
-            <p>Already have an account? <Link to="/login">Sign in</Link></p>
+            <p>
+              Already have an account? <Link to="/login">Sign in</Link>
+            </p>
           ) : (
-            <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
+            <p>
+              Don't have an account? <Link to="/signup">Sign up</Link>
+            </p>
           )}
         </div>
       </main>
