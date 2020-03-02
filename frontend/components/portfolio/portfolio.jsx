@@ -88,7 +88,7 @@ class Portfolio extends React.Component {
     if (stocksData && Object.keys(stocksData).length === tickers.length) {
       portfolioItems = stocks.map(stock => {
         latestPrice = twoDecimals(stocksData[stock.ticker].quote.latestPrice);
-        openPrice = stocksData[stock.ticker].quote.open;
+        openPrice = stocksData[stock.ticker].quote.previousClose;
         change = twoDecimals(((latestPrice - openPrice) * 100) / openPrice);
         total = twoDecimals(latestPrice * stock.quantity);
         netWorth += parseFloat(total);
